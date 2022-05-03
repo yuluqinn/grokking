@@ -577,6 +577,9 @@ class TrainableTransformer(LightningModule):
                 if self.current_epoch == 0:
                     self._save_inputs(outputs, ds="val")
                 self._save_activations(outputs, ds="val")
+                
+            print(" \n Validation loss: ", loss)
+            print(" \n Validation accuracy: ", accuracy)
 
             logs = {
                 "val_loss": loss,
