@@ -732,10 +732,10 @@ def train(hparams: Namespace) -> None:
         "log_every_n_steps": 1,
         "flush_logs_every_n_steps": 1000,
         # Adding checkpoint based resumtion
-        "resume_from_checkpoint": "/path/to/checkpoints/epoch_number.ckpt"
+#         "resume_from_checkpoint": "/path/to/checkpoints/epoch_number.ckpt"
     }
     if torch.cuda.is_available() and hparams.gpu >= 0:
-        trainer_args["gpus"] = [hparams.gpu+3] # Multi-GPU training - Add extra GPUs, assume 1 is present
+        trainer_args["gpus"] = [hparams.gpu] # Multi-GPU training - Add extra GPUs, assume 1 is present (+3)
         # @dev: No error handling; currently setup to use 4 GPUs for training. 
 
     trainer = Trainer(**trainer_args)
