@@ -736,7 +736,7 @@ def train(hparams: Namespace) -> None:
     trainer_args = {
         "max_steps": hparams.max_steps,
         "min_steps": hparams.max_steps,
-        "max_epochs": 5000, #int(1e8),
+        "max_epochs": 10000, #int(1e8),
         "val_check_interval": 1,
         "profiler": False,
         # "checkpoint_callback": checkpointer,
