@@ -505,6 +505,9 @@ class TrainableTransformer(LightningModule):
                 if self.current_epoch == 0:
                     self._save_inputs(outputs, ds="train")
                 self._save_activations(outputs, ds="train")
+                
+            print("\n training loss: ", loss)
+            print("\n training accuracy: ", accuracy)
 
             logs = {
                 "train_loss": loss,
