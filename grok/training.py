@@ -455,6 +455,12 @@ class TrainableTransformer(LightningModule):
         if self.current_epoch != self.next_train_epoch_to_log:
             return {"loss": loss}
         lr = schedulers["scheduler"].optimizer.param_groups[0]["lr"]
+        
+        print(" \n Epoch {}, Training loss: {}".format(
+            self.current_epoch, loss))
+        print(" \n Epochs {}, Training accuracy: {} ".format(
+            self.current_epoch, accuracy))
+        
         output = {
             "loss": loss,
             "partial_train_loss": coeff * loss,
@@ -541,6 +547,12 @@ class TrainableTransformer(LightningModule):
             loss, accuracy, coeff, x_lhs, y_hat_rhs, attentions, values = self._step(
                 batch=batch, batch_idx=batch_idx, train=False
             )
+            
+        
+        print(" \n Epoch {}, Validation loss: {}".format(
+            self.current_epoch, loss))
+        print(" \n Epochs {}, Validation accuracy: {} ".format(self.current_epoch, accuracy))
+        
         output = {
             "partial_val_loss": coeff * loss,
             "partial_val_accuracy": coeff * accuracy,
@@ -853,7 +865,7 @@ def add_args(parser=None) -> Namespace:
     parser.add_argument("--random_seed", type=int, default=-1)
     parser.add_argument("--gpu", type=int, default=0)
     parser.add_argument("--max_epochs", type=int, default=None)
-    parser.add_argument("--max_steps", type=int, default=10000)
+    parser.add_argument("--max_steps", type=int, default=20000)
     # parser.add_argument("--checkpoint_period", type=int, default=1)
     parser = TrainableTransformer.add_model_specific_args(parser)
     return parser
